@@ -1,0 +1,226 @@
+.homeSection {
+  margin: 5rem auto;
+}
+
+.homeSection .button-group {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.homeSection .button-group a {
+  min-width: 220px;
+}
+
+
+.FormUI {
+  width: 50%;
+  margin: 2rem auto;
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  border-radius: 10px;
+  background: var(--white);
+}
+
+.RegisterFormUI.FormUI {
+  width: 100%;
+}
+
+.RegisterFormUI.FormUI .error {
+  margin: 0;
+}
+
+.FormUI .title {
+  text-align: center;
+  font-size: 25px;
+  font-family: var(--montserrat-font);
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin: 0 0 1rem 0;
+}
+
+.BannerSection {
+  position: relative;
+  background-position: center;
+  height: 500px;
+  object-fit: cover;
+  /* background: rgb(2, 77, 106);
+  background-image: linear-gradient(79deg, rgba(2, 77, 106, 0.8800770308123249) 0%, rgba(98, 180, 132, 0.8800770308123249) 55%), url("../public/images/banner.jpeg"); */
+  width: 100%;
+  background-size: cover;
+  background-image: url("../public/images/banner2.jpeg");
+}
+
+.BannerSection .proj-title {
+  position: absolute;
+  top: 35%;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.BannerSection .proj-title h1 {
+  color: var(--white);
+  font-family: var(--title-font);
+  font-size: 7rem;
+}
+
+.BannerSection .proj-title h1 span {
+  font-family: inherit;
+}
+
+
+.AboutSection {
+  position: relative;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.AboutSection h1 {
+  font-size: 25px;
+  font-family: var(--inter-font);
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+}
+
+.AboutSection h1 span {
+  font-size: 42px;
+  font-family: var(--inter-font);
+  display: block;
+  color: var(--secondary);
+  font-weight: 800;
+  margin: 5px 0 10px 0;
+  line-height: 50px;
+}
+
+.AboutSection p {
+  font-size: 16px;
+  font-family: var(--inter-font);
+  text-align: justify;
+  color: var(--gray);
+  width: 90%;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+.AboutSection .doctorImg {
+  width: 100%;
+  object-fit: cover;
+}
+
+.AboutSection .aboutus__content {
+  display: flex;
+  align-items: center;
+}
+
+.ViewDoctorDetails {
+  margin: 4rem auto;
+  width: 100%;
+  box-shadow: var(--box-shadow);
+  border-radius: 5px;
+  padding: 2rem;
+  background: var(--white);
+}
+
+.ViewDoctorDetails .head {
+  margin-bottom: 1rem;
+  border-bottom: 1px dashed var(--gray);
+  padding-bottom: 10px;
+}
+
+.ViewDoctorDetails h3,
+.ViewDoctorDetails h4 {
+  font-size: 22px;
+  font-weight: 600;
+  font-family: var(--inter-font);
+  color: var(--primary);
+  margin: 0;
+  letter-spacing: -.5px;
+}
+
+.ViewDoctorDetails h4 {
+  font-size: 18px;
+}
+
+.ViewDoctorDetails .avail {
+  border: 3px dashed var(--secondary);
+  padding: 1rem 1rem;
+}
+
+
+.ViewDoctorDetails p {
+  display: flex;
+}
+
+.ViewDoctorDetails p label {
+  font-weight: 400;
+  font-size: 15px;
+  color: var(--gray);
+  width: 160px;
+}
+
+.ViewDoctorDetails p span {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--black);
+  width: calc(100% - 260px);
+}
+
+.doctorList {
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+}
+
+.title-h3,
+.availTimeSlot {
+  font-size: 20px;
+  color: var(--primary);
+  font-weight: 600;
+  font-family: var(--inter-font);
+  margin: 10px 0 15px 0;
+  letter-spacing: -.5px;
+}
+
+h3.availTimeSlot {
+  font-size: 17px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+.timeSlots .button-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.button-group button {
+  border: none;
+  background: transparent;
+  line-height: 35px;
+}
+
+.button-group button.addBtn {
+  color: var(--bs-success);
+  font-size: 30px;
+}
+
+.button-group button.clearBtn {
+  font-size: 35px;
+  color: var(--bs-danger);
+}
+
+table .action-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
