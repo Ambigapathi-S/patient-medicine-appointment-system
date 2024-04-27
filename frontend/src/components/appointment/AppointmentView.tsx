@@ -17,13 +17,14 @@ const AppointmentView = () => {
   const role = localStorage.getItem("role");
   const [appDetails, setAppDetails] = useState({
     id: "",
-    doctorId: "",
-    patientId: "",
+    doctor: { id: "", fullName: " " },
+    patient: { id: "", fullName: " " },
     appointment_date: "",
     appointment_from_time: "",
     appointment_to_time: "",
     appointment_type: "",
     appointment_status: "",
+    doctorName: "",
   });
   const [status, setStatus] = useState("");
 
@@ -52,8 +53,8 @@ const AppointmentView = () => {
     e.preventDefault();
     let data: any = {
       id: appDetails.id,
-      doctorId: appDetails.doctorId,
-      patientId: appDetails.patientId,
+      doctor: {id: appDetails.doctor.id,},
+      patient: { id: appDetails.patient.id },
       appointment_date: appDetails.appointment_date,
       appointment_from_time: appDetails.appointment_from_time,
       appointment_to_time: appDetails.appointment_to_time,
@@ -91,12 +92,12 @@ const AppointmentView = () => {
         <Row>
           <Col xs={12} md={6} sm={6} lg={6}>
             <p>
-              <label>Doctor Id : </label>
-              <span>{appDetails.doctorId}</span>
+              <label>Doctor Details : </label>
+              <span>{appDetails.doctor.fullName}</span>
             </p>
             <p>
-              <label>Patient Id : </label>
-              <span>{appDetails.patientId}</span>
+              <label>Patient Details : </label>
+              <span>{appDetails.patient.fullName}</span>
             </p>
             <p>
               <label>Appointment Date : </label>

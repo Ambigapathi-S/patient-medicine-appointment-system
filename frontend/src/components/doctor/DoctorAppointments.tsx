@@ -31,8 +31,13 @@ const DoctorAppointments = () => {
         doctorId = response.data.id;
         fetchData(doctorId);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      if (error?.response?.status == 403) {
+        logout();
+        navigate("/login");
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -63,51 +68,66 @@ const DoctorAppointments = () => {
       <ToastContainer />
       <div className="RegisterFormUI FormUI">
         <h3 className="title">My Appointments</h3>
-        <Table bordered>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Appointment Date</th>
-              <th>From Time</th>
-              <th>To Time</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th className="text-center">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {appointmentDet.map((appointment: any, index: number) => (
-              <tr key={appointment.id}>
-                <td>{index + 1}</td>
-                <td>{appointment.appointment_date}</td>
-                <td>{appointment.appointment_from_time}</td>
-                <td>{appointment.appointment_to_time}</td>
-                <td>{appointment.appointment_type}</td>
-                <td>{appointment.appointment_status}</td>
-                <td className="action-icons text-center">
-                  {appointment.appointment_status == "Completed" && (
-                    <span className="edit tooltip">
-                      <button onClick={() => addMedication(appointment.id)}>
+        <div className="table-responsive">
+          <Table bordered>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Appointment Date</th>
+                <th>From Time</th>
+                <th>To Time</th>
+                <th>Patient Name</th>
+                <th>Patient Phone</th>
+                <th>Patient Address</th>
+                <th>Type of Sick</th>
+                <th>Status</th>
+                <th className="text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {appointmentDet.map((appointment: any, index: number) => (
+                <tr key={appointment.id}>
+                  <td>{index + 1}</td>
+                  <td>{appointment.appointment_date}</td>
+                  <td>{appointment.appointment_from_time}</td>
+                  <td>{appointment.appointment_to_time}</td>
+                  <td>{appointment.patient.fullName}</td>
+                  <td>{appointment.patient.phoneNumber}</td>
+                  <td>{appointment.patient.address}</td>
+                  <td>{appointment.patient.medicalHistory}</td>
+                  <td>{appointment.appointment_status}</td>
+                  <td className="action-icons text-center">
+                    {appointment.appointment_status == "Completed" && (
+                      <span className="edit tooltip">
+                        <button onClick={() => addMedication(appointment.id)}>
+                          <span className="icon">
+                            <FaRegEdit />
+                          </span>
+                          <span className="tooltiptext">Add Medication</span>
+                        </button>
+                      </span>
+                    )}
+                    <span className="view tooltip">
+                      <button onClick={() => viewAppointment(appointment.id)}>
                         <span className="icon">
-                          <FaRegEdit />
+                          <CiViewList />
                         </span>
-                        <span className="tooltiptext">Add Medication</span>
+                        <span className="tooltiptext">View</span>
                       </button>
                     </span>
-                  )}
-                  <span className="view tooltip">
-                    <button onClick={() => viewAppointment(appointment.id)}>
-                      <span className="icon">
-                        <CiViewList />
-                      </span>
-                      <span className="tooltiptext">View</span>
-                    </button>
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
+                  </td>
+                </tr>
+              ))}
+              {appointmentDet.length == 0 && (
+                <tr>
+                  <td colSpan={7} className="text-center">
+                    No Appointment's Found!
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
+        </div>
       </div>
     </Container>
   );

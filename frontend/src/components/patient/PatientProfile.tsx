@@ -86,8 +86,13 @@ const PatientProfile = () => {
         setValues(response.data);
         setPatientId(response.data.id);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      if (error?.response?.status == 403) {
+        logout();
+        navigate("/login");
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -99,8 +104,13 @@ const PatientProfile = () => {
         setValues(response.data);
         setPatientId(response.data.id);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      if (error?.response?.status == 403) {
+        logout();
+        navigate("/login");
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -134,6 +144,10 @@ const PatientProfile = () => {
     } catch (error: any) {
       let resMsg = error.response.data.message;
       toast(resMsg);
+      if (error?.response?.status == 403) {
+        logout();
+        navigate("/login");
+      }
     }
   };
 

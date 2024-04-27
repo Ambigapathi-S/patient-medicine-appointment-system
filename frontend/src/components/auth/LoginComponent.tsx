@@ -48,6 +48,8 @@ const LoginComponent = () => {
         setTimeout(() => {
           if (role === "ROLE_DOCTOR") {
             navigate(`/doctor/my-profile?email=${data.email}`);
+          } else if (role === "ROLE_ADMIN") {
+            navigate(`/doctor/list`);
           } else {
             navigate("/schedule-appointment");
           }
@@ -59,7 +61,7 @@ const LoginComponent = () => {
         toast(resMsg);
       }
     } catch (error: any) {
-      let resMsg = error.response.data.message;
+      let resMsg = error.message;
       toast(resMsg);
     }
   };

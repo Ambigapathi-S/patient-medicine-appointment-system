@@ -126,11 +126,18 @@
   background: var(--white);
 }
 
+.ViewDoctorDetails.medicationDetailView {
+  margin: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
 .ViewDoctorDetails .head {
   margin-bottom: 1rem;
   border-bottom: 1px dashed var(--gray);
   padding-bottom: 10px;
 }
+
 
 .ViewDoctorDetails h3,
 .ViewDoctorDetails h4 {
@@ -224,3 +231,76 @@ table .action-icons {
   gap: 10px;
 }
 
+.prescriptionDetails {
+  font-size: 20px;
+  color: var(--primary);
+  border-bottom: 1px dashed;
+  padding-bottom: 5px;
+  margin: 10px 0;
+}
+
+
+@media(max-width : 767px) {
+  header .navbar-nav {
+    gap: 10px;
+  }
+
+  header nav.navbar .nav-link.link-btn {
+    border: none;
+    padding: 10px 0;
+    margin: 0;
+    line-height: 20px;
+  }
+
+  header nav.navbar .nav-link.link-btn:hover {
+    color: var(--primary);
+    background: var(--white);
+  }
+
+  .FormUI {
+    width: 100%;
+  }
+
+  .pageNotFound h3,
+  .BannerSection .proj-title h1 {
+    font-size: 50px;
+  }
+
+  .pageNotFound h1 {
+    font-size: 40px;
+  }
+
+  .AboutSection {
+    padding: 1rem;
+  }
+
+  .RegisterFormUI .mb-3 {
+    margin-bottom: 0 !important;
+  }
+
+  .RegisterFormUI .mb-3.row .col-12 {
+    margin: 0 0 10px 0;
+  }
+
+  .ViewDoctorDetails p {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ViewDoctorDetails p span,
+  .ViewDoctorDetails p label {
+    width: 100%;
+  }
+
+  .ViewDoctorDetails h3,
+  .ViewDoctorDetails h4 {
+    font-size: 18px;
+  }
+
+  a.btn.btn-back,
+  button.btn.btn-back {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: var(--inter-font);
+  }
+}

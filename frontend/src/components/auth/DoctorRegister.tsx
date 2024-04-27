@@ -60,9 +60,9 @@ const DoctorRegister = () => {
     try {
       const modifiedData = { ...register, status: "pending" };
       const response = await doctorRegister(modifiedData);
-      let resMsg = response.data.message;
+      let resMsg = response.data;
       if (response.status === 200) {
-        toast(response.data, { type: "success" });
+        toast(resMsg, { type: "success" });
         reset();
         setTimeout(() => {
           navigate("/login");
@@ -74,12 +74,12 @@ const DoctorRegister = () => {
         toast(resMsg);
       }
     } catch (error: any) {
-      if (error.response.status === 403) {
+      if (error?.response?.status === 403) {
         logout();
         navigate("/login");
       } else {
-        let resMsg = error.response.data.message;
-        toast(resMsg);
+        let resMsg = error.message;
+        toast(resMsg, {type : "error"});
       }
     }
   };

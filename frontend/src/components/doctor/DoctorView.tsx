@@ -8,10 +8,29 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { createAppointment } from "../../service/AppointmentService";
-import { logout } from "../../service/AuthService";
+import { isAdminUser, isPatientUser, logout } from "../../service/AuthService";
 import { ToastContainer, toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import AppointmentTimeDropdown from "./AppointmentTimeDropdown";
+
+const appointmentSchema = yup
+  .object({
+    date: yup.string().required("Date is required"),
+    time: yup.string().required("Time is required"),
+  })
+  .required();
 
 const DoctorView = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(appointmentSchema),
+  });
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [doctorDetails, setDoctorDetails] = useState({
@@ -26,17 +45,15 @@ const DoctorView = () => {
     specialization: "",
     yearsOfExp: "",
     consultingFees: "",
-    consultingHrs: "",
+    consultingHrs: 0,
     availabilityFromTime: "",
     availabilityToTime: "",
   });
-  const [date, setDate] = useState("");
-  const [fromTime, setfFromTime] = useState("");
-  const [toTime, setToTime] = useState("");
 
   const emailId = localStorage.getItem("authenticatedUser");
   const [patientId, setPatientId] = useState("");
-  console.log(emailId);
+  const isPatient = isPatientUser();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -56,6 +73,7 @@ const DoctorView = () => {
     };
     fetchData();
   }, [id]);
+
   const patientDet = async () => {
     try {
       if (emailId) {
@@ -70,30 +88,30 @@ const DoctorView = () => {
     }
   };
 
-  const checkBookingAvailability = async (e: any) => {
-    e.preventDefault();
+  const onSubmit = async (data: any) => {
     let bookAppointmentDto: any = {
-      doctorId: doctorDetails.id,
-      patientId: patientId,
-      appointment_date: date,
-      appointment_from_time: fromTime,
-      appointment_to_time: toTime,
+      doctor: { id: doctorDetails.id },
+      patient: { id: patientId },
+      appointment_date: data.date,
+      appointment_from_time: data.fromTime,
+      appointment_to_time: data.toTime,
       appointment_type: "Direct",
       appointment_status: "Pending",
     };
     try {
       const response = await createAppointment(bookAppointmentDto);
       if (response.status === 201) {
-        toast("Appointment Booked successfully..!");
-        setDate("");
-        setfFromTime("");
-        setToTime("");
-        navigate("/my-appointments");
+        toast("Appointment Booked successfully..!", { type: "success" });
+        navigate(`/patient/my-appointments?email=${emailId}`);
       }
     } catch (error: any) {
-      if (error.response.status === 403) {
+      if (error?.response?.status === 403) {
         logout();
         navigate("/login");
+      } else if (error?.response?.data) {
+        toast(error?.response?.data?.message, { type: "error" });
+      } else {
+        toast(error?.message, { type: "error" });
       }
     }
   };
@@ -163,47 +181,63 @@ const DoctorView = () => {
                 {doctorDetails.availabilityToTime}
               </span>
             </p>
-            <div className="avail">
-              <h4>Check Availability & Book Appointment</h4>
-              <div className="form-group mt-3">
-                <input
-                  type="date"
-                  placeholder="Appointment Date"
-                  className="form-control"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                />
-              </div>
-              <div className="form-group mt-3 mb-3">
-                <Row>
-                  <Col xs={12} md={6} sm={6} lg={6}>
+            {isPatient && (
+              <div className="avail">
+                <h4>Check Availability & Book Appointment</h4>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="form-group mt-3">
                     <input
-                      type="time"
-                      placeholder="From Time"
-                      className="form-control"
-                      value={fromTime}
-                      onChange={(e) => setfFromTime(e.target.value)}
+                      type="date"
+                      {...register("date")}
+                      placeholder="Appointment Date"
+                      className={`form-control ${errors.date ? "error" : ""} `}
                     />
-                  </Col>
-                  <Col xs={12} md={6} sm={6} lg={6}>
-                    <input
-                      type="time"
-                      placeholder="To Time"
-                      className="form-control"
-                      value={toTime}
-                      onChange={(e) => setToTime(e.target.value)}
-                    />
-                  </Col>
-                </Row>
+                    <p className="error">{errors.date?.message}</p>
+                  </div>
+                  <div className="form-group mt-3 mb-3">
+                    <Row>
+                      <Col xs={12} md={12} sm={12} lg={12}>
+                          <AppointmentTimeDropdown
+                            fromTime={doctorDetails?.availabilityFromTime}
+                            toTime={doctorDetails?.availabilityToTime}
+                            duration={doctorDetails?.consultingHrs}
+                          />
+                      </Col>
+                    </Row>
+                    {/* <Row>
+                      <Col xs={12} md={6} sm={6} lg={6}>
+                        <input
+                          type="time"
+                          {...register("fromTime")}
+                          placeholder="Appointment From Time"
+                          className={`form-control ${
+                            errors.fromTime ? "error" : ""
+                          } `}
+                        />
+                        <p className="error">{errors.fromTime?.message}</p>
+                      </Col>
+                      <Col xs={12} md={6} sm={6} lg={6}>
+                        <input
+                          type="time"
+                          {...register("toTime")}
+                          placeholder="Appointment To Time"
+                          className={`form-control ${
+                            errors.fromTime ? "error" : ""
+                          } `}
+                        />
+                        <p className="error">{errors.toTime?.message}</p>
+                      </Col>
+                    </Row> */}
+                  </div>
+
+                  <input
+                    type="submit"
+                    className="btn btn-info"
+                    value="Book Now"
+                  />
+                </form>
               </div>
-              <button
-                type="button"
-                className="btn btn-info"
-                onClick={(e) => checkBookingAvailability(e)}
-              >
-                Book Now
-              </button>
-            </div>
+            )}
           </Col>
         </Row>
       </div>

@@ -1,6 +1,6 @@
 :root {
   --primary: #024d6a;
-  --primary-light: #024d6a3a;
+  --primary-light: #d54e52;
   --secondary: #62b484;
   --secondary-light: #62b48414;
   --gray: #00000099;
@@ -281,7 +281,45 @@ button.btn.btn-info:hover {
   border: none;
 }
 
-a.btn.btn-back, button.btn.btn-back  {
+a.btn.btn-back,
+button.btn.btn-back {
   background-color: var(--light-gray);
   color: var(--black);
+}
+
+header .navbar-expand-lg .navbar-nav .dropdown-menu {
+  position: absolute;
+  z-index: 9999;
+}
+
+.pageNotFound {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 5rem 0;
+}
+
+.pageNotFound h3 {
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--primary);
+  font-family: var(--inter-font);
+}
+
+.pageNotFound h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  color: var(--secondary);
+  font-family: var(--montserrat-font);
+  letter-spacing: -0.9px;
+}
+
+.table-responsive::-webkit-scrollbar {
+  height: 5px;
+  background-color: var(--secondary);
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-light);
 }

@@ -25,7 +25,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 LocalDateTime.now(),
                 exception.getMessage(),
                 webRequest.getDescription(false),
-                "EMPLOYEE_NOT_FOUND"
+                "DATA_NOT_FOUND"
         );
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
@@ -36,7 +36,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 LocalDateTime.now(),
                 exception.getMessage(),
                 webRequest.getDescription(false),
-                "EMPLOYEE_EMAIL_ALREADY_EXISTS"
+                "EMAIL_ALREADY_EXISTS"
         );
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }

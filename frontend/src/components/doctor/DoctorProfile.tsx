@@ -10,7 +10,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { logout } from "../../service/AuthService";
+import { getLoggedInUser, isAdminUser, isDoctorUser, isPatientUser, logout } from "../../service/AuthService";
 import { Col, Row } from "react-bootstrap";
 
 const phoneRegExp =
@@ -51,6 +51,9 @@ const DoctorProfile = () => {
   const { id } = useParams();
   const [doctorProfile, setDoctorProfile]: any = useState(null);
   const navigate = useNavigate();
+  const isAdmin = isAdminUser();
+  const isDoctor = isDoctorUser();
+  const email = getLoggedInUser();
   const {
     register,
     handleSubmit,
@@ -126,14 +129,20 @@ const DoctorProfile = () => {
     setValue("availabilityToTime", data.availabilityToTime);
     setValue("status", data.status);
   }
-
+  
   const onSubmit = async (register: {}) => {
     try {
       const response = await editDoctorDetails(doctorProfile.id, register);
       let resMsg = response.data.message;
       if (response.status === 200) {
         toast("Updated Successfully!", { type: "success" });
-        navigate("/doctor/list");
+        if (isAdmin) {
+          navigate("/doctor/list");
+        } else if (isDoctor) {
+          navigate(`/doctor/my-profile?email=${email}`);
+        } else {
+          navigate(`/patient/my-profile?email=${email}`);
+        }
       } else if (response.status === 403) {
         logout();
         navigate("/login");
@@ -156,10 +165,12 @@ const DoctorProfile = () => {
       <ToastContainer />
       <div className="RegisterFormUI FormUI ViewDoctorDetails">
         <div className="head d-flex justify-content-between align-items-center">
-          <h3>Update Doctor Details</h3>
-          <a href="/doctor/list" className="btn btn-back">
-            Back to List
-          </a>
+          <h3>Doctor Profile</h3>
+          {isAdmin && (
+            <a href="/doctor/list" className="btn btn-back">
+              Back to List
+            </a>
+          )}
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Row className="mb-3">
@@ -279,9 +290,9 @@ const DoctorProfile = () => {
                   {...register("status")}
                   className={`form-control ${errors.status ? "error" : ""} `}
                 >
-                  <option value="Pending">Pending</option>
-                  <option value="Approved">Approved</option>
-                  <option value="Rejected">Rejected</option>
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
                 </select>
                 <p className="error">{errors.status?.message}</p>
               </div>

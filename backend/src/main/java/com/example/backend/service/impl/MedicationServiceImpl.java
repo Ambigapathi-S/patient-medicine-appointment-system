@@ -4,6 +4,7 @@ import com.example.backend.dto.MedicationDto;
 import com.example.backend.entity.Appointment;
 import com.example.backend.entity.Medication;
 import com.example.backend.exception.ResourceNotFoundException;
+import com.example.backend.repository.AppointmentRepository;
 import com.example.backend.repository.MedicationRepository;
 import com.example.backend.service.MedicationService;
 import lombok.AllArgsConstructor;
@@ -18,10 +19,15 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class MedicationServiceImpl implements MedicationService {
     private MedicationRepository medicationRepository;
+    private AppointmentRepository appointmentRepository;
     private ModelMapper modelMapper;
 
     @Override
     public MedicationDto saveMedication(MedicationDto medicationDto) {
+        Appointment appointment = appointmentRepository.findById(medicationDto.getAppointment().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Appointment", "id", medicationDto.getAppointment().getId()));
+
+        medicationDto.setAppointment(appointment);
         Medication medication = modelMapper.map(medicationDto, Medication.class);
         return modelMapper.map(medicationRepository.save(medication), MedicationDto.class);
     }
@@ -45,7 +51,11 @@ public class MedicationServiceImpl implements MedicationService {
         Medication medication = medicationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Medication", "id", id));
         medication.setId(medicationDto.getId());
-        medication.setAppointment_id(medicationDto.getAppointment_id());
+
+        Appointment appointment = appointmentRepository.findById(medicationDto.getAppointment().getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Appointment", "id", medicationDto.getAppointment().getId()));
+
+        medication.setAppointment(appointment);
         medication.setPrescription(medicationDto.getPrescription());
         medication.setNotes(medicationDto.getNotes());
         return modelMapper.map(medicationRepository.save(medication), MedicationDto.class);

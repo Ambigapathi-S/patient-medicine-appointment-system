@@ -58,9 +58,9 @@ const PatientRegister = () => {
   const onSubmit = async (register: {}) => {
     try {
       const response = await patientRegister(register);
-      let resMsg = response.data.message;
+      let resMsg = response.data;
       if (response.status === 200) {
-        toast(response.data, { type: "success" });
+        toast(resMsg, { type: "success" });
         reset();
         setTimeout(() => {
           navigate("/login");
@@ -72,7 +72,7 @@ const PatientRegister = () => {
         toast(resMsg);
       }
     } catch (error: any) {
-      let resMsg = error.response.data.message;
+      let resMsg = error.message;
       toast(resMsg);
     }
   };
