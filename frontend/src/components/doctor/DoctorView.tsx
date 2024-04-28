@@ -18,7 +18,6 @@ import AppointmentTimeDropdown from "./AppointmentTimeDropdown";
 const appointmentSchema = yup
   .object({
     date: yup.string().required("Date is required"),
-    time: yup.string().required("Time is required"),
   })
   .required();
 
@@ -88,13 +87,21 @@ const DoctorView = () => {
     }
   };
 
+  const [time, setTime] = useState("");
+
+  const updateChange = (newValue: string) => {
+    setTime(newValue);
+  };
+
   const onSubmit = async (data: any) => {
+    let fromToTime: any = time.split("-");
+
     let bookAppointmentDto: any = {
       doctor: { id: doctorDetails.id },
       patient: { id: patientId },
       appointment_date: data.date,
-      appointment_from_time: data.fromTime,
-      appointment_to_time: data.toTime,
+      appointment_from_time: fromToTime[0],
+      appointment_to_time: fromToTime[1],
       appointment_type: "Direct",
       appointment_status: "Pending",
     };
@@ -115,6 +122,7 @@ const DoctorView = () => {
       }
     }
   };
+
   return (
     <Container>
       <ToastContainer />
@@ -190,6 +198,7 @@ const DoctorView = () => {
                       type="date"
                       {...register("date")}
                       placeholder="Appointment Date"
+                      min={new Date().toISOString().split('T')[0]}
                       className={`form-control ${errors.date ? "error" : ""} `}
                     />
                     <p className="error">{errors.date?.message}</p>
@@ -197,11 +206,12 @@ const DoctorView = () => {
                   <div className="form-group mt-3 mb-3">
                     <Row>
                       <Col xs={12} md={12} sm={12} lg={12}>
-                          <AppointmentTimeDropdown
-                            fromTime={doctorDetails?.availabilityFromTime}
-                            toTime={doctorDetails?.availabilityToTime}
-                            duration={doctorDetails?.consultingHrs}
-                          />
+                        <AppointmentTimeDropdown
+                          fromTime={doctorDetails?.availabilityFromTime}
+                          toTime={doctorDetails?.availabilityToTime}
+                          duration={doctorDetails?.consultingHrs}
+                          updateChange={updateChange}
+                        />
                       </Col>
                     </Row>
                     {/* <Row>
