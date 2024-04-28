@@ -16,27 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `roles`
+-- Table structure for table `medication`
 --
 
-DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `medication`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `roles` (
+CREATE TABLE `medication` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `appointment_id` bigint NOT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `prescription` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKmdaok8ap8gt2cprpx5emwdm4g` (`appointment_id`),
+  CONSTRAINT `FKmdaok8ap8gt2cprpx5emwdm4g` FOREIGN KEY (`appointment_id`) REFERENCES `appointment` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `roles`
+-- Dumping data for table `medication`
 --
 
-LOCK TABLES `roles` WRITE;
-/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'ROLE_ADMIN'),(2,'ROLE_DOCTOR'),(3,'ROLE_PATIENT');
-/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+LOCK TABLES `medication` WRITE;
+/*!40000 ALTER TABLE `medication` DISABLE KEYS */;
+INSERT INTO `medication` VALUES (1,2,'Take Rest Well','Syrup 10 ml\ntablet 2 times\n - mrng 1 \n - evng 1');
+/*!40000 ALTER TABLE `medication` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +52,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-25 21:58:57
+-- Dump completed on 2024-04-28 10:08:46

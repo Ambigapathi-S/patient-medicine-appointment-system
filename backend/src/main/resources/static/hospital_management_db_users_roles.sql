@@ -16,37 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `patient`
+-- Table structure for table `users_roles`
 --
 
-DROP TABLE IF EXISTS `patient`;
+DROP TABLE IF EXISTS `users_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `patient` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `address` varchar(255) NOT NULL,
-  `blood_group` varchar(255) DEFAULT NULL,
-  `dob` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `full_name` varchar(255) NOT NULL,
-  `gender` varchar(255) NOT NULL,
-  `medical_history` varchar(255) DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_bawli8xm92f30ei6x9p3h8eju` (`email`),
-  UNIQUE KEY `UK_8a1e9jp83y5txoaywwv2v2pl7` (`phone_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `users_roles` (
+  `user_id` bigint NOT NULL,
+  `role_id` bigint NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `FKj6m8fwv7oqv74fcehir1a9ffy` (`role_id`),
+  CONSTRAINT `FK2o0jvgh89lemvvo17cbqvdxaa` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `FKj6m8fwv7oqv74fcehir1a9ffy` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `patient`
+-- Dumping data for table `users_roles`
 --
 
-LOCK TABLES `patient` WRITE;
-/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES (1,'Coimbatore','O- ve','2000-05-20','nazi@gmail.com','Naziii','Female','Cold fever','$2a$10$lEYMv9f9zDxb6hvls0OV..BEdd2C9NvhX20nh0KCMt3qgtFG3HtEe','8965741230'),(2,'I-104, Icon Happy Living, Next SFS school, Opp to Bio-conn, Kammasandra Village, Hebbagodi.','O+ve','1995-12-12','sana@gmail.com','Sana Sana','Female','Fever, Headache....etc','$2a$10$eZQnzUeu9CaOs0HwBLadYu7uFIkt4LuQOjDR0jWN8BUWWsVPWVtMO','9845726315');
-/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
+LOCK TABLES `users_roles` WRITE;
+/*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
+INSERT INTO `users_roles` VALUES (1,1),(2,2),(3,2),(4,3),(5,3);
+/*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -58,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-25 21:58:58
+-- Dump completed on 2024-04-28 10:08:46

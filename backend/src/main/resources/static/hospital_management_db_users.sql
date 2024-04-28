@@ -16,35 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `appointment`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `appointment`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `appointment` (
+CREATE TABLE `users` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `appointment_date` varchar(255) NOT NULL,
-  `appointment_from_time` varchar(255) NOT NULL,
-  `appointment_status` varchar(255) NOT NULL,
-  `appointment_to_time` varchar(255) NOT NULL,
-  `appointment_type` varchar(255) NOT NULL,
-  `doctor_id` bigint NOT NULL,
-  `patient_id` bigint NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKoeb98n82eph1dx43v3y2bcmsl` (`doctor_id`),
-  CONSTRAINT `FKoeb98n82eph1dx43v3y2bcmsl` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `appointment`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `appointment` WRITE;
-/*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (1,'2024-04-18','10:00','Approved','10:30','DIRECT',1,1),(2,'2024-04-19','10:00','Completed','10:30','Direct',1,1),(3,'2024-04-19','15:00','Approved','16:30','Direct',1,1),(4,'2024-04-19','15:00','Completed','15:30','Direct',1,1);
-/*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'raji@gmail.com','$2a$10$JOZQlaJ63eLpMFJXtGzxQe0KKkGqSOolZCSdC2tqFEtp/sblkOQ2m'),(2,'ambiga@gmail.com','$2a$10$YaoKRUY4V8P2yicslQ2G2egmAGZghoIA73swvChvFFB/ZCWnLCsSm'),(3,'elakki@gmail.com','$2a$10$aCco5Jur2cGGKpuh0AtU8.NOZ4RWIpmX8eil.RobUmU16KqbyOMQW'),(4,'nazi@gmail.com','$2a$10$SUCHHrNv32vlap2S86N5je6f2JwNm/9hgw7ecz8MoaRMePvylz1N6'),(5,'vijay@gmail.com','$2a$10$coUzqmp0xDdMuZ9w4BoScuBFLu6q1HJMUHN5OsYLkVa/6oyznwNju');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-25 21:58:57
+-- Dump completed on 2024-04-28 10:08:46

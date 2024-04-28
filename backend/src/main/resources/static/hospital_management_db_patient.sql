@@ -16,29 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `patient`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `patient`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE `patient` (
   `id` bigint NOT NULL AUTO_INCREMENT,
+  `address` varchar(255) NOT NULL,
+  `blood_group` varchar(255) DEFAULT NULL,
+  `dob` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `gender` varchar(255) NOT NULL,
+  `medical_history` varchar(255) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `UK_6dotkott2kjsp8vw4d0m25fb7` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `UK_bawli8xm92f30ei6x9p3h8eju` (`email`),
+  UNIQUE KEY `UK_8a1e9jp83y5txoaywwv2v2pl7` (`phone_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `patient`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'ambiga@gmail.com','$2a$10$0BTl.KyitOB6eEfm8OrLiuU6cVZuU3hA3HvCJE4xn9mi0XgvyZji2'),(2,'nazi@gmail.com','$2a$10$htiqFhpoPb8IPCWHSWRPIOBdwmKEVnksAw/tEJybintRkSbCwOg12'),(3,'raji@gmail.com','$2a$10$TF.pC2V7vQbKyhdzzNK4ROxLMq59LyCWdqUAR0TK8XK1CdmtNGXi2'),(4,'priya@gmail.com','$2a$10$hQV9JpwZR1M8PG.xMhFKVem9d6RgYkRTBPaL0TREmZyUjJCVQz8/.'),(5,'sana@gmail.com','$2a$10$yyiU6u5lWUWcVXdonNJsxuk2Bbc5YVvTFtVMbWpeCljx/ve2Roaze');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `patient` WRITE;
+/*!40000 ALTER TABLE `patient` DISABLE KEYS */;
+INSERT INTO `patient` VALUES (1,'Kerala','O+ve','1998-10-10','nazi@gmail.com','Nazi','Female','Cold','$2a$10$bxOu5OT9kYCNUps/ckfkf.FNTAgCZVLt5VxR0GaAABZlRld0xjuu6','8965741230'),(2,'Nagercoil','O- ve','1993-01-19','vijay@gmail.com','Vijay','Male','Fever, Headache','$2a$10$JwVhP1gn2MYMEmbT0txT.eXE/55ZhuoS0BQBj1ZaKHijQesmtk/aG','9845726310');
+/*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-25 21:58:58
+-- Dump completed on 2024-04-28 10:08:46

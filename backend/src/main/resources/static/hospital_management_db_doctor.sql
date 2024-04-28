@@ -42,7 +42,7 @@ CREATE TABLE `doctor` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK_jdtgexk368pq6d2yb3neec59d` (`email`),
   UNIQUE KEY `UK_25rbvlce70qpi6i47tm3nmx4r` (`phone_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,7 +51,7 @@ CREATE TABLE `doctor` (
 
 LOCK TABLES `doctor` WRITE;
 /*!40000 ALTER TABLE `doctor` DISABLE KEYS */;
-INSERT INTO `doctor` VALUES (1,'14/42c-367 upstairs, Amarnath Colony, Nearby Sangeetha sabha, Mukkudal - 627601, Tirunelveli district','10:00','20:30',500,30,'Cardiologist','1999-12-06','ambiga@gmail.com','Ambiga','Female','$2a$10$RNGcMj54HWg2CB/xMdWGJuBPDSehhOJP01JygoPithwgG6lYM119y','9517532846','Cardio','Approved','3'),(2,'Mukkudal','10:00','17:00',400,30,'physiotherapy','1997-11-14','raji@gmail.com','Raji','Female','$2a$10$SGLdux.EyvhSuNV20QYW9.9My5Z8p0WiALLqP54OTZjPWUQ7Bxj9a','9845726310','physiotherapy','pending','3'),(3,'Nagercoil','11:00','18:00',400,30,'Neurologist','1992-08-07','priya@gmail.com','Priya K','Female','$2a$10$yhcJG8GTzi5pE5qPK9hSp.375R3Fs8PXXmTbNsgpgIG6hVfotur0e','9845726311','Neurologist','pending','5');
+INSERT INTO `doctor` VALUES (1,'Mukkudal','19:00','22:00',500,30,'Cardiologist','1999-12-06','raji@gmail.com','Raji','Female','$2a$10$pXDHu12r3PtgkCO4iszJm.XmpKidUsTAXTZH2JK3o3UVlR6j1Jzie','9517532846','Cardio','pending','3'),(2,'Tirunelveli','19:00','22:30',500,30,'Cardiologist','1995-12-06','ambiga@gmail.com','Ambiga','Female','$2a$10$vNMEXKIys7drJ5W5Ppg2Wecg1IhMwYHQ3Hg20d9/Fd8ZMjluC6p4u','9874563210','Cardiology','approved','3'),(4,'Tirunelveli','19:00','22:00',500,30,'Cardiologist','1997-11-14','elakki@gmail.com','Elakki','Female','$2a$10$zGbYwCdeU1HT/zDzM.RejO0khdNaPcjcsIzcesILpxXyJUV4XjDWi','9874563258','Cardio','approved','3');
 /*!40000 ALTER TABLE `doctor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -64,4 +64,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-25 21:58:58
+-- Dump completed on 2024-04-28 10:08:46

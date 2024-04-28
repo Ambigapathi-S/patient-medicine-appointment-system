@@ -16,30 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users_roles`
+-- Table structure for table `appointment`
 --
 
-DROP TABLE IF EXISTS `users_roles`;
+DROP TABLE IF EXISTS `appointment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users_roles` (
-  `user_id` bigint NOT NULL,
-  `role_id` bigint NOT NULL,
-  PRIMARY KEY (`user_id`,`role_id`),
-  KEY `FKj6m8fwv7oqv74fcehir1a9ffy` (`role_id`),
-  CONSTRAINT `FK2o0jvgh89lemvvo17cbqvdxaa` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  CONSTRAINT `FKj6m8fwv7oqv74fcehir1a9ffy` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `appointment` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `appointment_date` varchar(255) NOT NULL,
+  `appointment_from_time` varchar(255) NOT NULL,
+  `appointment_status` varchar(255) NOT NULL,
+  `appointment_to_time` varchar(255) NOT NULL,
+  `appointment_type` varchar(255) NOT NULL,
+  `doctor_id` bigint DEFAULT NULL,
+  `patient_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKoeb98n82eph1dx43v3y2bcmsl` (`doctor_id`),
+  KEY `FK4apif2ewfyf14077ichee8g06` (`patient_id`),
+  CONSTRAINT `FK4apif2ewfyf14077ichee8g06` FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`),
+  CONSTRAINT `FKoeb98n82eph1dx43v3y2bcmsl` FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users_roles`
+-- Dumping data for table `appointment`
 --
 
-LOCK TABLES `users_roles` WRITE;
-/*!40000 ALTER TABLE `users_roles` DISABLE KEYS */;
-INSERT INTO `users_roles` VALUES (3,1),(1,2),(4,2),(2,3),(5,3);
-/*!40000 ALTER TABLE `users_roles` ENABLE KEYS */;
+LOCK TABLES `appointment` WRITE;
+/*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
+INSERT INTO `appointment` VALUES (2,'2024-04-28','19:00','Completed','19:30','Direct',2,1),(3,'2024-04-28','19:00','Pending','19:30','Direct',4,1),(4,'2024-04-28','19:10','Pending','19:30','Direct',2,1),(5,'2024-04-29','20:00 ','Pending',' 20:30','Direct',2,1),(6,'2024-04-28','19:00 ','Pending',' 19:30','Direct',4,1);
+/*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-25 21:58:58
+-- Dump completed on 2024-04-28 10:08:46
