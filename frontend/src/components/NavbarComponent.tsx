@@ -20,7 +20,6 @@ const NavbarComponent = () => {
   const isAdmin = isAdminUser();
   const navigate = useNavigate();
   const email = getLoggedInUser();
-
   function handlLogout() {
     logout();
     navigate("/login");
@@ -45,6 +44,9 @@ const NavbarComponent = () => {
               <Dropdown>
                 <Dropdown.Toggle id="dropdown-basic">
                   <FaRegUserCircle /> Settings
+                  {isAdmin && <span>(Admin)</span>}
+                  {isDoctor && <span>(Doctor)</span>}
+                  {isPatient && <span>(Patient)</span>}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>

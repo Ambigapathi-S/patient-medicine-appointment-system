@@ -38,11 +38,20 @@ const MedicationAddEditForm = () => {
     try {
       let response: any = "";
       if (isAdd) {
-        const medication = { appointment_id, prescription, notes };
+        const medication = {
+          appointment: { id: appointment_id },
+          prescription,
+          notes,
+        };
         response = await saveMedication(medication);
       } else {
         let id = medication_id;
-        const medication = { id, appointment : {id : appointment_id}, prescription, notes };
+        const medication = {
+          id,
+          appointment: { id: appointment_id },
+          prescription,
+          notes,
+        };
         response = await updateMedication(id, medication);
       }
       if (response.status === 200 || response.status === 201) {
@@ -109,62 +118,67 @@ const MedicationAddEditForm = () => {
           </button>
         </div>
         <div className="card-body">
-          <div className="ViewDoctorDetails medicationDetailView">
-            <Row>
-              <Col xs={12} md={6} sm={6} lg={6}>
-                <p>
-                  <label>Patient Name : </label>
-                  <span>
-                    {doctorPatientDetails?.appointment?.patient?.fullName}
-                  </span>
-                </p>
-                <p>
-                  <label>Type of Sick : </label>
-                  <span>
-                    {doctorPatientDetails?.appointment?.patient?.medicalHistory}
-                  </span>
-                </p>
-                <p>
-                  <label>Address : </label>
-                  <span>
-                    {doctorPatientDetails?.appointment?.patient?.address}
-                  </span>
-                </p>
-                <p>
-                  <label>Phone Number : </label>
-                  <span>
-                    {doctorPatientDetails?.appointment?.patient?.phoneNumber}
-                  </span>
-                </p>
-              </Col>
-              <Col xs={12} md={6} sm={6} lg={6}>
-                <p>
-                  <label>Date of Appointment : </label>
-                  <span>
-                    {doctorPatientDetails?.appointment?.appointment_date}
-                  </span>
-                </p>
-                <p>
-                  <label>Doctor Name : </label>
-                  <span>
-                    {doctorPatientDetails?.appointment?.doctor?.fullName}
-                  </span>
-                </p>
-                <p>
-                  <label>Address : </label>
-                  <span>
-                    {doctorPatientDetails?.appointment?.doctor?.address}
-                  </span>
-                </p>
-                <p>
-                  <label>Phone Number : </label>
-                  <span>
-                    {doctorPatientDetails?.appointment?.doctor?.phoneNumber}
-                  </span>
-                </p>
-              </Col>
-            </Row>
-          </div>
+          {!isAdd && (
+            <div className="ViewDoctorDetails medicationDetailView">
+              <Row>
+                <Col xs={12} md={6} sm={6} lg={6}>
+                  <p>
+                    <label>Patient Name : </label>
+                    <span>
+                      {doctorPatientDetails?.appointment?.patient?.fullName}
+                    </span>
+                  </p>
+                  <p>
+                    <label>Type of Sick : </label>
+                    <span>
+                      {
+                        doctorPatientDetails?.appointment?.patient
+                          ?.medicalHistory
+                      }
+                    </span>
+                  </p>
+                  <p>
+                    <label>Address : </label>
+                    <span>
+                      {doctorPatientDetails?.appointment?.patient?.address}
+                    </span>
+                  </p>
+                  <p>
+                    <label>Phone Number : </label>
+                    <span>
+                      {doctorPatientDetails?.appointment?.patient?.phoneNumber}
+                    </span>
+                  </p>
+                </Col>
+                <Col xs={12} md={6} sm={6} lg={6}>
+                  <p>
+                    <label>Date of Appointment : </label>
+                    <span>
+                      {doctorPatientDetails?.appointment?.appointment_date}
+                    </span>
+                  </p>
+                  <p>
+                    <label>Doctor Name : </label>
+                    <span>
+                      {doctorPatientDetails?.appointment?.doctor?.fullName}
+                    </span>
+                  </p>
+                  <p>
+                    <label>Address : </label>
+                    <span>
+                      {doctorPatientDetails?.appointment?.doctor?.address}
+                    </span>
+                  </p>
+                  <p>
+                    <label>Phone Number : </label>
+                    <span>
+                      {doctorPatientDetails?.appointment?.doctor?.phoneNumber}
+                    </span>
+                  </p>
+                </Col>
+              </Row>
+            </div>
+          )}
           <form>
             <div className="form-group mt-3">
               <label className="form-label">Prescription</label>

@@ -79,7 +79,7 @@ const MedicationList = () => {
               ))}
               {!medicationList.length && (
                 <tr>
-                  <td colSpan={5} className="text-center">
+                  <td colSpan={8} className="text-center">
                     No Medication's Found
                   </td>
                 </tr>
