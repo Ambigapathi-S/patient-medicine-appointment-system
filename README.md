@@ -34,4 +34,4 @@ This project implements a web-based Patient Medicine and Appointment System with
 
 # Version Control
     This project is version-controlled using Git. The code repository is located on GitHub.
-    [https://github.com/Ambigapathi-S/employee-management-system](https://github.com/Ambigapathi-S/patient-medicine-appointment-system)
+    https://github.com/Ambigapathi-S/employee-management-system
