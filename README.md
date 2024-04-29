@@ -26,7 +26,7 @@ This project implements a web-based Patient Medicine and Appointment System with
    * frontend: React application for the user interface
    * backend: Spring Boot application for the backend API
      
-   [ Added a video of project work flow.Click this link to go the video path.](https://github.com/Ambigapathi-S/employee-management-system/blob/main/Employee-Management-Frontend/public/Employee%20Management%20System.mp4)
+   [ Added a video of project work flow.Click this link to go the video path.](https://github.com/Ambigapathi-S/patient-medicine-appointment-system/blob/main/frontend/public/Mindful%20Medicine.mp4)
   
 # Documentation
    [ For detailed instructions on setting up the development environment, using the application, and deploying it, refer to the full documentation by click the link.](https://docs.google.com/document/d/1NQ-4tzoeM-mbl0w9HCeMo_SZAEZGOhFw8w7FAAZ6ihE/edit)
